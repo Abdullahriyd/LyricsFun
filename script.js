@@ -3,15 +3,15 @@ document.querySelector('.search-total').style.display = 'none';
 
 document.getElementById('searchBtn').addEventListener('click', function(){
     const searchText = document.getElementById('searchText').value;
-    songSearch(searchText);
+    songsData(searchText);
 })
 
 document.getElementById('searchText').addEventListener('change',function(){
     const searchText = document.getElementById('searchText').value;
-    songSearch(searchText);
+    songsData(searchText);
 })
 
-function songSearch (searchText) {
+function songsData (searchText) {
     fetch(`https://api.lyrics.ovh/suggest/${searchText}`) 
     .then(res => res.json())
     .then(data => displaySongs(data))
@@ -47,7 +47,7 @@ function displaySongs (data){
                 </div>
             </div>
             <div class="col-md-3 text-md-right text-center">
-            <button onclick="showLyrics('${artistName}', '${songTitle}')" class="btn btn-success">Get Lyrics</button>
+            <button onclick="lyricsData('${artistName}', '${songTitle}')" class="btn btn-success">Get Lyrics</button>
             </div>
         </div>`;
 
@@ -56,7 +56,7 @@ function displaySongs (data){
      document.getElementById('searchText').value ='';
 }
 
-function showLyrics(artist, title) {
+function lyricsData(artist, title) {
     fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
     .then(res => res.json())
     .then(data => displayLyrics(data.lyrics, title, artist))
